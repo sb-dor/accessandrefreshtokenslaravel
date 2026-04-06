@@ -89,10 +89,13 @@ class AuthController extends Controller
             // Token already expired — fine
         }
 
-        // Delete all refresh tokens for this user (full session revocation)
-        if ($request->user()) {
-            $request->user()->refreshTokens()->delete();
-        }
+        // Delete only the current device's refresh token (per-device logout)
+        RefreshToken::where('token', $request->input('refresh_token'))->delete();
+
+        // Delete all refresh tokens for this user (full session revocation — logout from all devices)
+        // if ($request->user()) {
+        //     $request->user()->refreshTokens()->delete();
+        // }
 
         return response()->json(['message' => 'Logged out']);
     }
