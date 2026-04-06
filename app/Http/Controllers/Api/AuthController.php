@@ -70,7 +70,7 @@ class AuthController extends Controller
 
         $user = $record->user;
 
-        // Rotate: delete old record, issue fresh pair
+        // Rotate: delete old record, issue fresh pair - read about refresh_token_rotation
         $record->delete();
 
         return response()->json($this->issueTokens($user));
