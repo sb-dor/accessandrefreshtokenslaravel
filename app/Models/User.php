@@ -14,7 +14,7 @@ class User extends Authenticatable implements JWTSubject
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'role'];
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -33,7 +33,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getJWTCustomClaims(): array
     {
-        return [];
+        return ['role' => $this->role];
     }
 
     public function refreshTokens(): HasMany

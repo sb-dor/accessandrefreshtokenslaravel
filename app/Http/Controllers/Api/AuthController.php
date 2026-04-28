@@ -126,7 +126,7 @@ class AuthController extends Controller
         ]);
 
         return [
-            'user'          => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email],
+            'user'          => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $user->role],
             'access_token'  => $accessToken,
             'refresh_token' => $refreshToken,
             'token_type'    => 'bearer',

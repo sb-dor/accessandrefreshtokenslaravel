@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         // Pure API — never redirect guests, always return 401 JSON
         $middleware->redirectGuestsTo(fn() => null);
+        $middleware->alias(['role' => \App\Http\Middleware\RoleMiddleware::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e) {
